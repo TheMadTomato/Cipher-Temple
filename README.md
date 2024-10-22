@@ -12,7 +12,7 @@ pip install -r requirments.txt
 ```
 Run the application with this command: 
 ```bash 
-python3 Cipher-Temple.py
+python3 src/Cipher-Temple.py
 ```
 
 # Current Available Ciphers
