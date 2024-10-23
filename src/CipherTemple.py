@@ -1,9 +1,12 @@
 from ceasarlib import *
 from menulib import *
+from pyfiglet import Figlet
 
 def main_menu():
+    figlet = Figlet(font='bloody')  # ansi_regular
+    cipher_temple_title = figlet.renderText('Cipher Temple')
     while True:
-        print("\nMain Menu:")
+        print(cipher_temple_title)
         print("1. Caesar Cipher")
         print("2. Exit")
         
