@@ -8,7 +8,7 @@ git clone https://github.com/TheMadTomato/Cipher-Temple && cd Cipher-Temple
 ```
 Install the required dependencies by running:
 ```bash
-pip install -r requirments.txt
+pip install -r src/requirments.txt
 ```
 Run the application with this command: 
 ```bash 
