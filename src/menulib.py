@@ -1,3 +1,6 @@
+'''
+This Library will contain the sub-menu for each cipher algorithm. Sepearated from the main script in order keep things clean and modular
+'''
 from ceasarlib import *
 
 def caesar_menu():
