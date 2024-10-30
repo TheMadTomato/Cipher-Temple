@@ -5,7 +5,7 @@ also the key input is masked
 from getpass import getpass
 
 
-def caesar_encrypt(plaintext, key):
+def caesar_encrypt(plaintext: str, key: int) -> str:
     # For each alphabetical character, skip spaces and numbers, shift the ascii decimal value then append it to a list. Following the content of the list is concatenated with no spaces and returned
     result = []
     for char in plaintext:
@@ -15,7 +15,7 @@ def caesar_encrypt(plaintext, key):
             result.append(chr(shift))
     return ''.join(result)
 
-def caesar_decrypt(ciphertext, key):
+def caesar_decrypt(ciphertext: str, key: int) -> str:
     # Same as encrypt method but instead of "+ key" we use "-key"
     result = []
     for char in ciphertext:
@@ -24,7 +24,7 @@ def caesar_decrypt(ciphertext, key):
             result.append(chr(shift))
     return ''.join(result)
 
-def get_caesar_key():
+def get_caesar_key() -> int:
     # getpass module allow the input to be hidden within the active session.
     input_key = getpass("Enter your password: ")
     # Usage of try-except statment is better for this case because it is handeling dynamic input. and if statment wht the type() function is not pythonic and only good for static input
