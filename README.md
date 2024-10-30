@@ -16,8 +16,8 @@ python3 src/main.py
 ```
 
 # Current Available Ciphers
-[Ceasare Cipher](./doc/Caesar_Cipher_doc.md)
-[Pigcrypt Cipher](./doc/Pigcrypt_Cipher_doc.md)
+- [Ceasare Cipher](./doc/Caesar_Cipher_doc.md)
+- [Pigcrypt Cipher](./doc/Pigcrypt_Cipher_doc.md)
 
 # Language of Choice
 Python was chosen as the best language for this porject. Due to it's simplicity and rapid development environment.
