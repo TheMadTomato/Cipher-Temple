@@ -1,34 +1,61 @@
-'''
-Pigcrypt can be hardly considered a cipher, but it adds a layer of obfuscation on strings by changing the position of the first character in each word
-to the end of the word and add the letters "ay" at its end. In a way it can be considered as a layer of salting to the original string and can prove to be useful
-with other simple ciphers such as ceasar or transposition.
+#==============================CLASS===========================================#
+#==============================================================================#
+class PigCrypt:
+    """
+    Implements a Pig Latin-style obfuscation, adding a layer of salting by transforming
+    each word. It moves the first character of each word to the end and appends "AY",
+    making it compatible with other simple ciphers like Caesar or transposition.
+    """
 
-M = go study u lazy idiot
-C = ogay tudysay uay azylay diotiay
-  = ogaytudysayuayazylaydiotiay
-'''
+    #===============================INIT========================================#
+    #==========================================================================#
+    def __init__(self, message: str = ""):
+        # Initialize instance variable
+        self.message = message
 
-def pigcrypt_encrypt(message: str) -> str:
-    # Split the message into words
-    message = message.split()
-    
-    # For each word, move the first character to the end and add "ay"
-    for i in range(len(message)):
-        message[i] = message[i][1:] + message[i][0] + "AY"
-    
-    # Join the words without spaces
-    return "".join(message)
+    #============================SET MESSAGE===================================#
+    #==========================================================================#
+    def set_message(self, message: str):
+        """
+        Sets the message to be obfuscated.
+        """
+        self.message = message.upper()
 
-def pigcrypt_decrypt(cipher: str) -> str:
-    # Split the cipher text into words
-    cipher = cipher.split('AY')
-    
-    # For each "word", move the last character (before "ay") back to the front
-    decrypted_words = []
-    for part in cipher:
-        if part:  # Ensure it's not an empty string
-            decrypted_word = part[-1] + part[:-1]  # Move the last character to the front
-            decrypted_words.append(decrypted_word)
-    
-    # Join the decrypted words into a message
-    return " ".join(decrypted_words)
+    #=============================OBFUSCATION==================================#
+    #==========================================================================#
+    def pigcrypt_encrypt(self) -> str:
+        """
+        Obfuscates the message using Pig Latin-style transformation.
+        - Moves the first letter of each word to the end and appends "AY."
+        - Returns the obfuscated message.
+        """
+        words = self.message.split()
+        encrypted_words = []
+        
+        for word in words:
+            if len(word) > 1:
+                encrypted_words.append(word[1:] + word[0] + "AY")
+            else:
+                encrypted_words.append(word + "AY")  # For single-character words
+
+        return "".join(encrypted_words)
+
+    #=============================DECRYPTION===================================#
+    #==========================================================================#
+    def pigcrypt_decrypt(self) -> str:
+        """
+        Decrypts the Pig Latin-style obfuscated message.
+        - Removes "AY" from the end of each word and moves the last character
+          back to the beginning.
+        - Returns the decrypted message.
+        """
+        cipher = self.message.split('AY')
+        decrypted_words = []
+
+        for part in cipher:
+            if part:  # Ensure it's not an empty string
+                decrypted_word = part[-1] + part[:-1]
+                decrypted_words.append(decrypted_word)
+        
+        return " ".join(decrypted_words)
+

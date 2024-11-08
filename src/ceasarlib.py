@@ -1,35 +1,91 @@
-'''
-Ceasar Cipher contains 3 functions one for encryption one for decryption and one to accept both integers and strings as input, by converting strigns input into their length.
-also the key input is masked
-'''
+#=================================IMPORTS======================================#
+#==============================================================================#
 from getpass import getpass
 
+#==============================CLASS===========================================#
+#==============================================================================#
+class CaesarCipher:
+    """
+    Implements Caesar Cipher encryption and decryption with support for handling
+    integer and string-based keys. Key input is masked for security.
+    """
 
-def caesar_encrypt(plaintext: str, key: int) -> str:
-    # For each alphabetical character, skip spaces and numbers, shift the ascii decimal value then append it to a list. Following the content of the list is concatenated with no spaces and returned
-    result = []
-    for char in plaintext:
-        if char.isalpha():
-            # If you want the output to be in lower case, change upper() to lower, and both 65s to 97s
-            shift = (ord(char.upper()) - 65 + key) % 26 + 65
-            result.append(chr(shift))
-    return ''.join(result)
+    #===============================INIT========================================#
+    #==========================================================================#
+    def __init__(self, message: str = "", key: int = 0):
+        # Initialize instance variables
+        self.message = message
+        self.key = key
 
-def caesar_decrypt(ciphertext: str, key: int) -> str:
-    # Same as encrypt method but instead of "+ key" we use "-key"
-    result = []
-    for char in ciphertext:
-        if char.isalpha():
-            shift = (ord(char.upper()) - 65 - key) % 26 + 65
-            result.append(chr(shift))
-    return ''.join(result)
+    #============================SET MESSAGE===================================#
+    #==========================================================================#
+    def set_message(self, message: str):
+        """
+        Sets the message to be encrypted or decrypted.
+        """
+        self.message = message
 
-def get_caesar_key() -> int:
-    # getpass module allow the input to be hidden within the active session.
-    input_key = getpass("Enter your password: ")
-    # Usage of try-except statment is better for this case because it is handeling dynamic input. and if statment wht the type() function is not pythonic and only good for static input
-    try:
-        return int(input_key)
-    except ValueError:
-        return len(input_key)
+    #==============================SET KEY=====================================#
+    #==========================================================================#
+    def set_key(self, key: int):
+        """
+        Sets the encryption/decryption key.
+        - Accepts an integer key for shifting characters.
+        """
+        if isinstance(key, int):
+            self.key = key
+        else:
+            raise ValueError("Key must be an integer")
+
+    #=============================ENCRYPTION===================================#
+    #==========================================================================#
+    def caesar_encrypt(self) -> str:
+        """
+        Encrypts the message using the Caesar cipher.
+        - Shifts alphabetical characters by the key, skipping spaces and numbers.
+        - Returns the encrypted message.
+        """
+        result = []
+        for char in self.message:
+            if char.isalpha():  # Encrypt only alphabetic characters
+                # Shift character based on ASCII value
+                shift = (ord(char.upper()) - 65 + self.key) % 26 + 65
+                result.append(chr(shift))
+        return ''.join(result)
+
+    #=============================DECRYPTION===================================#
+    #==========================================================================#
+    def caesar_decrypt(self) -> str:
+        """
+        Decrypts the message using the Caesar cipher.
+        - Shifts characters back by the key value.
+        - Returns the decrypted message.
+        """
+        result = []
+        for char in self.message:
+            if char.isalpha():  # Decrypt only alphabetic characters
+                shift = (ord(char.upper()) - 65 - self.key) % 26 + 65
+                result.append(chr(shift))
+        return ''.join(result)
+
+    #==============================GET KEY=====================================#
+    #==========================================================================#
+    def get_key_from_user(self):
+        """
+        Prompts the user to enter a key, which can be an integer or a string.
+        - Integer values are directly used as the key.
+        - String values are converted to their length to be used as the key.
+        - Hides input for security.
+        """
+        while True:
+            input_key = getpass("Enter Key: ")
+            try:
+                key = int(input_key)  # Attempt to use input as an integer
+                self.set_key(key)
+                break
+            except ValueError:
+                # If not an integer, use the length of the input string as the key
+                key = len(input_key)
+                self.set_key(key)
+                break
 
