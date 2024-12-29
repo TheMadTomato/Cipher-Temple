@@ -18,7 +18,7 @@ Version 2.0.0
 '''
 #=================================IMPORTS======================================#
 #==============================================================================#
-from menulib import caesar_menu, pigcrypt_menu, columnartransposition_menu
+from menulib import caesar_menu, pigcrypt_menu, columnartransposition_menu, rsa_menu
 from pyfiglet import Figlet
 from rich.console import Console
 from rich.panel import Panel
@@ -46,7 +46,9 @@ def main_menu() -> None:
         console.print("[1] Caesar Cipher", style="bold green")
         console.print("[2] Pigcrypt Cipher", style="bold green")
         console.print("[3] Columnar Transposition Cipher", style="bold green")
-        console.print("[4] Exit", style="bold red")
+        console.print("[4] RSA Cipher", style="bold green")
+        console.print("[5] Perform Caesar Cipher Attack", style="bold yellow")
+        console.print("[6] Exit", style="bold red")
         
         choice = prompt("Please choose an option: ", style=style).strip()
         
@@ -57,6 +59,11 @@ def main_menu() -> None:
         elif choice == '3':
             columnartransposition_menu()
         elif choice == '4':
+            rsa_menu()
+        elif choice == '5':
+            console.print("Performing Caesar Cipher Attack...", style="bold yellow")
+            caesar_menu()  # Includes attack as an option
+        elif choice == '6':
             console.print("Exiting the program. Goodbye!", style="bold red")
             clear_term()
             break
@@ -67,4 +74,3 @@ def main_menu() -> None:
 #==============================================================================#
 if __name__ == "__main__":
     main_menu()
-
